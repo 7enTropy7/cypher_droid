@@ -103,7 +103,7 @@ while 1:
                 GPIO.output(33,GPIO.HIGH)
                 GPIO.output(31,GPIO.LOW)
                 # print('Up')
-
+            
             if e.dict['axis'] == 3 and e.dict['value'] >= 0.5:
                 if h >= 10:
                     h -= delta
@@ -128,6 +128,11 @@ while 1:
                 else:
                     v = 180
                 SetAngle(v,5)
-
-
+            
+            if e.dict['axis'] == 5 and e.dict['value'] >= 0.5:
+                h = 90
+                v = 90
+                SetAngle(h,3)
+                SetAngle(v,5)
+            
 GPIO.cleanup()
