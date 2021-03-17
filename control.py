@@ -82,26 +82,26 @@ while 1:
             elif e.dict['axis'] == 0 and e.dict['value'] >= 0.5:
                 GPIO.output(37,GPIO.LOW)
                 GPIO.output(35,GPIO.HIGH)
-                GPIO.output(33,GPIO.HIGH)
-                GPIO.output(31,GPIO.LOW)
+                GPIO.output(33,GPIO.LOW)
+                GPIO.output(31,GPIO.HIGH)
                 # print('Right')
             elif e.dict['axis'] == 0 and e.dict['value'] <= -0.5:
                 GPIO.output(37,GPIO.HIGH)
                 GPIO.output(35,GPIO.LOW)
-                GPIO.output(33,GPIO.LOW)
-                GPIO.output(31,GPIO.HIGH)
+                GPIO.output(33,GPIO.HIGH)
+                GPIO.output(31,GPIO.LOW)
                 # print('Left')
             elif e.dict['axis'] == 1 and e.dict['value'] >= 0.5:
                 GPIO.output(37,GPIO.LOW)
                 GPIO.output(35,GPIO.HIGH)
-                GPIO.output(33,GPIO.LOW)
-                GPIO.output(31,GPIO.HIGH)
+                GPIO.output(33,GPIO.HIGH)
+                GPIO.output(31,GPIO.LOW)
                 # print('Down')
             elif e.dict['axis'] == 1 and e.dict['value'] <= -0.5:
                 GPIO.output(37,GPIO.HIGH)
                 GPIO.output(35,GPIO.LOW)
-                GPIO.output(33,GPIO.HIGH)
-                GPIO.output(31,GPIO.LOW)
+                GPIO.output(33,GPIO.LOW)
+                GPIO.output(31,GPIO.HIGH)
                 # print('Up')
             
             if e.dict['axis'] == 3 and e.dict['value'] >= 0.5:
