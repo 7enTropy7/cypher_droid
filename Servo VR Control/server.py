@@ -93,7 +93,13 @@ def serveRoot():
 def moveServos():
     v_angle = request.form["updown"]
     h_angle = request.form["leftright"]
+    
+    if v_angle < 0:
+        v_angle += 180
+    h_angle = h_angle % 180
+    
     print('Horizontal: ' + str(h_angle) + "        Vertical: " + str(v_angle))
+    
     SetAngle(v_angle,vertical)
     SetAngle(h_angle,horizontal)
     Sleep(0.2)
