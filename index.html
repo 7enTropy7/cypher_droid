@@ -1,0 +1,27 @@
+<DOCTYPE html>
+    <html>
+        <head>
+            <script>
+                function init() {
+          
+                var dataContainerOrientation = document.getElementById('dataContainerOrientation');
+                
+                if(window.DeviceOrientationEvent) {
+                    window.addEventListener('deviceorientation', function(event) {
+                            var alpha = event.alpha;
+                            var beta = event.beta;
+                            var gamma = event.gamma;
+                        
+                            if(alpha!=null || beta!=null || gamma!=null) 
+                            dataContainerOrientation.innerHTML = 'alpha: ' + alpha + '<br/>beta: ' + beta + '<br />gamma: ' + gamma;
+                        }, false);
+                    }
+                }   
+            </script>
+        </head>
+    <body onload="init()">
+        <div id="dataContainerOrientation">
+            No device orientation data
+        </div>
+    </body>
+</html>  
