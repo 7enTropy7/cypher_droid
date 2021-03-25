@@ -3,20 +3,6 @@ from pygame import *
 import RPi.GPIO as GPIO
 from time import sleep as Sleep
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-
-# Servo Control Pins
-horizontal = 3
-vertical = 5
-
-GPIO.setup(horizontal, GPIO.OUT)
-pwm_h=GPIO.PWM(horizontal, 50)
-GPIO.setup(vertical, GPIO.OUT)
-pwm_v=GPIO.PWM(vertical, 50)
-pwm_h.start(0)
-pwm_v.start(0)
-
 
 def translate(value, leftMin, leftMax, rightMin, rightMax):
     leftSpan = leftMax - leftMin
@@ -82,7 +68,9 @@ TPL = '''
     </script>
 </html>
 '''
-
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 app = Flask(__name__)
 
 @app.route("/")
@@ -91,8 +79,8 @@ def serveRoot():
 
 @app.route("/moveservos", methods=["POST"])
 def moveServos():
-    v_angle = request.form["updown"]
-    h_angle = request.form["leftright"]
+    v_angle = int(float(request.form["updown"]))
+    h_angle = int(float(request.form["leftright"]))
     
     if v_angle < 0:
         v_angle += 180
@@ -108,5 +96,19 @@ def moveServos():
 GPIO.cleanup()
 
 if __name__ == "__main__":
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD)
+
+    # Servo Control Pins
+    horizontal = 3
+    vertical = 5
+
+    GPIO.setup(horizontal, GPIO.OUT)
+    pwm_h=GPIO.PWM(horizontal, 50)
+    GPIO.setup(vertical, GPIO.OUT)
+    pwm_v=GPIO.PWM(vertical, 50)
+    pwm_h.start(0)
+    pwm_v.start(0)
+
     app.run(host="0.0.0.0")#, ssl_context='adhoc')
 
