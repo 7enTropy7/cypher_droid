@@ -8,7 +8,7 @@ import threading
 import os
 
 class VideoCamera(object):
-    def __init__(self, flip = False):
+    def __init__(self, flip = True):
         self.vs = PiVideoStream().start()
         self.flip = flip
         time.sleep(2.0)
@@ -18,7 +18,7 @@ class VideoCamera(object):
 
     def flip_if_needed(self, frame):
         if self.flip:
-            return np.flip(frame, 0)
+            return np.flip(frame,0)
         return frame
 
     def get_frame(self):
@@ -26,7 +26,7 @@ class VideoCamera(object):
         ret, jpeg = cv2.imencode('.jpg', frame)
         return jpeg.tobytes()
 
-pi_camera = VideoCamera(flip=False) 
+pi_camera = VideoCamera(flip=True) 
 
 app = Flask(__name__)
 
