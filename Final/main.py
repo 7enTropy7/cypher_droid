@@ -47,6 +47,12 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(pi_camera),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
 @app.route("/moveservos", methods=["POST"])
 def moveServos():
     v_angle = int(float(request.form["updown"]))
@@ -62,7 +68,7 @@ def moveServos():
     SetAngle(h_angle,horizontal)
     Sleep(0.2)
 
-    return Response(gen(pi_camera),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return ""
 
 if __name__ == '__main__':
     
