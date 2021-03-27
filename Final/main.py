@@ -74,7 +74,7 @@ TPL = '''
     {
         output.innerHTML = "Android device";
         if(window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', function(event) {updown = event.gamma-initPos_v+90;leftright = event.alpha-initPos_h+90;});
+            window.addEventListener('deviceorientation', function(event) {updown = event.gamma-initPos_v+180;leftright = event.alpha-initPos_h+90;});
         }
         finishRequest();
     }
