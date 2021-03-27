@@ -74,7 +74,9 @@ TPL = '''
     {
         output.innerHTML = "Android device";
         if(window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', function(event) {updown = event.gamma-initPos_v+180;leftright = event.alpha-initPos_h+90;});
+            window.addEventListener('deviceorientation', function(event) {
+                updown = event.gamma-initPos_v+90;
+                leftright = event.alpha-initPos_h+90;});
         }
         finishRequest();
     }
@@ -112,8 +114,8 @@ def moveServos():
     v_angle = int(float(request.form["updown"]))
     h_angle = int(float(request.form["leftright"]))
     
-    if v_angle < 0:
-        v_angle += 180
+    # if v_angle < 0:
+    #     v_angle += 180
     h_angle = h_angle % 180
     
     print('Horizontal: ' + str(h_angle) + "        Vertical: " + str(v_angle))
