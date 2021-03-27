@@ -49,13 +49,16 @@ TPL = '''
     <div class="main" id="newpost">
         <img  class="camera-bg" style="width: 100%; height:80%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
     </div>
-    <button id="connectbtn" onclick="requestPermission()">Connect</button>
+        <button id="connectbtn" onclick="requestPermission()">Connect</button>
+        <button id="calibratebtn" onclick="calibrate()">Calibrate</button>
     <div id="outputdiv"></div>
 </body> 
 <script>
     var output = document.getElementById("outputdiv");
     var btn = document.getElementById("connectbtn");
     var socket = false;
+    var initPos_h = 0;
+    var initPos_v = 0;
     var updown = 0;
     var leftright = 0;
     function sendToFlask()
@@ -71,13 +74,18 @@ TPL = '''
     {
         output.innerHTML = "Android device";
         if(window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', function(event) {updown = event.gamma;leftright = event.alpha;});
+            window.addEventListener('deviceorientation', function(event) {updown = event.gamma-initPos_v+90;leftright = event.alpha-initPos_h+90;});
         }
         finishRequest();
     }
+    function calibrate()
+    {
+        initPos_h = leftright;
+        initPos_v = updown;
+    }
     function finishRequest()
     {
-        setInterval(sendToFlask, 250);
+        setInterval(sendToFlask, 500);
     }
 </script>
 </html>
