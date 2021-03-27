@@ -1,10 +1,9 @@
 from stream import VideoCamera
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template_string, Response, request
 import logging
 from pygame import *
 import RPi.GPIO as GPIO
 from time import sleep as Sleep
-
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -37,9 +36,56 @@ def SetAngle(angle,target_pin):
 
 app = Flask(__name__)
 
+TPL = '''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Stream</title>
+</head>
+<body>
+    <center><h1>PiCam Stream</h1></center>
+    <div class="main" id="newpost">
+        <img  class="camera-bg" style="width: 100%; height:80%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
+    </div>
+    <button id="connectbtn" onclick="requestPermission()">Connect</button>
+    <div id="outputdiv"></div>
+</body> 
+<script>
+    var output = document.getElementById("outputdiv");
+    var btn = document.getElementById("connectbtn");
+    var socket = false;
+    var updown = 0;
+    var leftright = 0;
+    function sendToFlask()
+    {
+        const xhr = new XMLHttpRequest();
+        const data = new FormData();
+        data.append("updown", updown);
+        data.append("leftright", leftright);
+        xhr.open("POST", "moveservos");
+        xhr.send(data);
+    }
+    function requestPermission()
+    {
+        output.innerHTML = "Android device";
+        if(window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', function(event) {updown = event.gamma;leftright = event.alpha;});
+        }
+        finishRequest();
+    }
+    function finishRequest()
+    {
+        setInterval(sendToFlask, 250);
+    }
+</script>
+</html>
+'''
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template_string(TPL)
 
 def gen(camera):
     while True:
