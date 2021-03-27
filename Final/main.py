@@ -75,11 +75,8 @@ TPL = '''
         output.innerHTML = "Android device";
         if(window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', function(event) {
-                updown = event.gamma-initPos_v+180;
+                updown = event.gamma;
                 leftright = event.alpha-initPos_h+90;});
-                if(updown<0){
-                    updown += 90;
-                }
         }
         finishRequest();
     }
