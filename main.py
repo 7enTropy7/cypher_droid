@@ -47,10 +47,10 @@ TPL = '''
 <body>
     <center><h1>PiCam Stream</h1></center>
     <div style="width:50%;Text-align:left;float:left;">
-        <img  class="camera-bg" style="width: 60%; height:60%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
+        <img  class="camera-bg" style="width: 80%; height:60%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
     </div>
     <div style="Text-align:right;Width:50%;float:right">
-        <img  class="camera-bg" style="width: 60%; height:60%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
+        <img  class="camera-bg" style="width: 80%; height:60%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
     </div>
         <button id="connectbtn" onclick="requestPermission()">Connect</button>
         <button id="calibratebtn" onclick="calibrate()">Calibrate</button>
