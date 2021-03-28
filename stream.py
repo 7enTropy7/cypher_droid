@@ -18,8 +18,8 @@ class VideoCamera(object):
 
     def flip_if_needed(self, frame):
         if self.flip:
-            np.flip(frame,1)
-            return np.flip(frame,0)
+            # np.flip(frame,1)
+            return np.flip(frame)
         return frame
 
     def get_frame(self):
