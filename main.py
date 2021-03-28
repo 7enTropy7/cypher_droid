@@ -46,10 +46,10 @@ TPL = '''
 </head>
 <body>
     <center><h1>PiCam Stream</h1></center>
-    <div style="width:70%;Text-align:left;float:left;">
+    <div style="width:60%;Text-align:left;float:left;">
         <img  class="camera-bg" style="width: 70%; height:70%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
     </div>
-    <div style="Text-align:right;Width:70%;float:right">
+    <div style="Text-align:right;Width:60%;float:right">
         <img  class="camera-bg" style="width: 70%; height:70%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">        
     </div>
         <button id="connectbtn" onclick="requestPermission()">Connect</button>
