@@ -7,6 +7,5 @@ It uses a VR based controller that allows the user to take control of the bot an
 
 ![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/36446402/114066930-dda6cd00-98b9-11eb-8a0f-457779c7e8b9.gif)
 
-![ezgif com-gif-maker (9)](https://user-images.githubusercontent.com/36446402/114068713-d2ed3780-98bb-11eb-8bcc-e903f19b6c78.gif)
+![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/36446402/114071931-4fcde080-98bf-11eb-8c4c-67c4076cd932.gif)
 
-![ezgif com-gif-maker (10)](https://user-images.githubusercontent.com/36446402/114069573-c3bab980-98bc-11eb-8d57-fbd96549d16c.gif)
