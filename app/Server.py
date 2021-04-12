@@ -6,11 +6,23 @@ from threading import Thread
 import multiprocessing
 
 def SetAngle(orientation):
+	
+	GPIO.setmode(GPIO.BOARD)
+	GPIO.setwarnings(False)
+
+	GPIO.setup(5, GPIO.OUT)
+	pwm_v=GPIO.PWM(5, 50)
+	pwm_v.start(0)
+
+	GPIO.setup(3, GPIO.OUT)
+	pwm_h=GPIO.PWM(3, 50)
+	pwm_h.start(0)
+	
 	while True:
 		print(((int(orientation[0]))), ((int(orientation[1]))))
 		
-		#if orientation[1]>180.0 or orientation[1]<1.0:
-		#	continue
+		if orientation[1]>180.0 or orientation[1]<1.0:
+			continue
 				
 		duty = (int(orientation[1])) / 18 + 2
 		GPIO.output(5, True)
@@ -19,8 +31,8 @@ def SetAngle(orientation):
 		GPIO.output(5, False)
 		pwm_v.ChangeDutyCycle(0)		
 		
-		#if orientation[0]>180.0 or orientation[1]<1.0:
-		#	continue
+		if orientation[0]>180.0 or orientation[1]<1.0:
+			continue
 	
 		duty = (int(orientation[0])) / 18 + 2
 		GPIO.output(3, True)
@@ -61,16 +73,7 @@ def host(recvda, orientation):
 		s.close()
 		
 if __name__ == "__main__":
-	GPIO.setmode(GPIO.BOARD)
-	GPIO.setwarnings(False)
-
-	GPIO.setup(5, GPIO.OUT)
-	pwm_v=GPIO.PWM(5, 50)
-	pwm_v.start(0)
-
-	GPIO.setup(3, GPIO.OUT)
-	pwm_h=GPIO.PWM(3, 50)
-	pwm_h.start(0)
+	
 	
 	orientation = multiprocessing.Array(ctypes.c_float, [90.00,90.00])
 	recvda = multiprocessing.Value(ctypes.c_wchar_p, "")
