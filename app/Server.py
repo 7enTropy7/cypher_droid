@@ -27,7 +27,7 @@ def SetAngle(orientation):
 		duty = (int(orientation[1])) / 18 + 2
 		GPIO.output(5, True)
 		pwm_v.ChangeDutyCycle(duty)
-		Sleep(0.1)
+		Sleep(0.2)
 		GPIO.output(5, False)
 		pwm_v.ChangeDutyCycle(0)		
 		
@@ -37,7 +37,7 @@ def SetAngle(orientation):
 		duty = (int(orientation[0])) / 18 + 2
 		GPIO.output(3, True)
 		pwm_h.ChangeDutyCycle(duty)
-		Sleep(0.1)
+		Sleep(0.2)
 		GPIO.output(3, False)
 		pwm_h.ChangeDutyCycle(0)
 		
