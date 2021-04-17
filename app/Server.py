@@ -2,8 +2,18 @@ import socket, ctypes
 import time
 import RPi.GPIO as GPIO
 from time import sleep as Sleep
-from threading import Thread
 import multiprocessing
+import cv2
+
+def videostream():
+	while True:
+		ret, fr = cap.read()
+		frame = cv2.flip(fr,0)
+		cv2.imshow('frame',frame)
+		if cv2.waitKey(1) & 0xff == 27:
+			break
+	cv2.destroyAllWindows()
+	
 
 def SetAngle(orientation):
 	
@@ -24,7 +34,7 @@ def SetAngle(orientation):
 		if orientation[1]>180.0 or orientation[1]<1.0:
 			continue
 				
-		duty = (int(orientation[1])) / 18 + 2
+		duty = ((int(orientation[1])-70) / 18 + 2)
 		GPIO.output(5, True)
 		pwm_v.ChangeDutyCycle(duty)
 		Sleep(0.2)
@@ -74,6 +84,7 @@ def host(recvda, orientation):
 		
 if __name__ == "__main__":
 	
+	cap = cv2.VideoCapture(0)
 	
 	orientation = multiprocessing.Array(ctypes.c_float, [90.00,90.00])
 	recvda = multiprocessing.Value(ctypes.c_wchar_p, "")
@@ -83,17 +94,19 @@ if __name__ == "__main__":
 	s.bind(('192.168.1.30', 5000))
 	s.listen(5)
 
-	#thread = Thread(target = SetAngle)
-	#thread.start()
 	p1 = multiprocessing.Process(target = SetAngle, args = (orientation, ))
 	p2 = multiprocessing.Process(target = host, args = (recvda, orientation, ))
+	p3 = multiprocessing.Process(target = videostream)
 	p1.start()
 	p2.start()
-	
-	#thread.join()
+	p3.start()
+
 	p1.join()
 	p2.join()
+	p3.join()
 	GPIO.cleanup
+	
+	cap.release()
 
 ''' (In potrait mode)
 first value: move to face mobile upward: +ve values, downwards: -ve values  (left, right for landscape)
