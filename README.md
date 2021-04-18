@@ -1,4 +1,6 @@
-# cYpher_droid
+# Cypher Droid
+<img src = "https://user-images.githubusercontent.com/36445600/115154600-63d0c980-a099-11eb-89e3-b63df0a62877.png" width = "200" height = "200">
+
 
 This project was completed under the guidance of [**Dr. P. Mahalakshmi**](https://research.vit.ac.in/researcher/mahalakshmi-p).
 
