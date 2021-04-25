@@ -1,9 +1,9 @@
 import socket, ctypes
 import time
-import RPi.GPIO as GPIO
 from time import sleep as Sleep
 import multiprocessing
 import cv2
+from piservo import Servo
 
 def videostream():
 	while True:
@@ -16,42 +16,22 @@ def videostream():
 	
 
 def SetAngle(orientation):
-	
-	GPIO.setmode(GPIO.BOARD)
-	GPIO.setwarnings(False)
-
-	GPIO.setup(5, GPIO.OUT)
-	pwm_v=GPIO.PWM(5, 50)
-	pwm_v.start(0)
-
-	GPIO.setup(3, GPIO.OUT)
-	pwm_h=GPIO.PWM(3, 50)
-	pwm_h.start(0)
-	
+	horizontal_servo = Servo(13)
+	vertical_servo = Servo(12)
 	while True:
 		print(((int(orientation[0]))), ((int(orientation[1]))))
 		
-		if orientation[1]>180.0 or orientation[1]<1.0:
+		if orientation[1]-50>170.0 or orientation[1]-50<1.0:
 			continue
-				
-		duty = ((int(orientation[1])-70) / 18 + 2)
-		GPIO.output(5, True)
-		pwm_v.ChangeDutyCycle(duty)
+
+		vertical_servo.write(orientation[1]-50)
 		Sleep(0.2)
-		GPIO.output(5, False)
-		pwm_v.ChangeDutyCycle(0)		
 		
 		if orientation[0]>180.0 or orientation[1]<1.0:
 			continue
-	
-		duty = (int(orientation[0])) / 18 + 2
-		GPIO.output(3, True)
-		pwm_h.ChangeDutyCycle(duty)
+
+		horizontal_servo.write(orientation[0])
 		Sleep(0.2)
-		GPIO.output(3, False)
-		pwm_h.ChangeDutyCycle(0)
-		
-		
 		
 
 def host(recvda, orientation):
