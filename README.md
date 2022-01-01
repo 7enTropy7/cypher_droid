@@ -4,7 +4,7 @@
 
 This project was completed under the guidance of [**Dr. P. Mahalakshmi**](https://research.vit.ac.in/researcher/mahalakshmi-p).
 
-Project Thesis: [**Clieck Here**](https://github.com/7enTropy7/cypher_droid/blob/main/Thesis.pdf)
+Project Thesis: [**Click Here**](https://github.com/7enTropy7/cypher_droid/blob/main/Thesis.pdf)
 
 ## Introduction
 
