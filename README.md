@@ -3,6 +3,8 @@
 <h1> Cypher Droid </h1>
 </div>
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
 This project was completed under the guidance of [**Dr. P. Mahalakshmi**](https://research.vit.ac.in/researcher/mahalakshmi-p).
 
 Project Thesis: [**Click Here**](https://github.com/7enTropy7/cypher_droid/blob/main/Thesis.pdf)
@@ -40,6 +42,8 @@ $ python3 main.py
 > - Hit Calibrate button after pointing phone in same direction as cYpher.
 
 cYpher's now ready to go out for a spin!
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ## Demonstration
 
